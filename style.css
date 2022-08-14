@@ -1,0 +1,11 @@
+table{
+    display: grid;
+    justify-content: center;
+}
+
+td {
+    border: black solid 1px;
+    border-radius: 5px;
+    height: 100px;
+    width: 100px;
+}
