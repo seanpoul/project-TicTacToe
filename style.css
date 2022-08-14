@@ -1,9 +1,19 @@
-table {
+* {
+    box-sizing: border-box;
+}
+
+tr {
     display: grid;
-    place-items: center;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    border: red solid 1px;
+    position: relative;
+    left: 150%;
 }
 
 td {
+    display: grid;
+    justify-content: center;
     border: black solid 1px;
     border-radius: 5px;
     height: 100px;
