@@ -2,13 +2,23 @@
     box-sizing: border-box;
 }
 
+h1 {
+    display: grid;
+    grid-template-rows: 80px 1fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+table {
+    display: grid;
+    justify-content: center;
+}
+
 tr {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
-    position: relative;
-    left: 150%;
-    /* border: red solid 1px; */
 }
 
 td {

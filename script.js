@@ -1,8 +1,7 @@
 const getTable = document.createElement('TABLE');
 let clickCounter = 0;
 let clickedCell;
-let winConditionsArray = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
-[0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+let boardState = ["", "", "", "", "", "", "", "", "",];
 
 (function makeGameboard() {
     document.body.append(getTable);
@@ -14,7 +13,7 @@ let winConditionsArray = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
     }
 })();
 
-console.log(clickedCell)
+// console.log(clickedCell)
 
 getTable.addEventListener('click', (clickedCell) => {
     clickCounter++
@@ -37,14 +36,27 @@ getTable.addEventListener('click', (clickedCell) => {
         }
 
     }
-    return clickedCell
-})
+    checkWinner(clickedCell)
+});
 
 
-function checkWinner(choiceOne, choiceTwo, choiceThree) {
+function checkWinner(clickedCell) {
+    let winConditionsArray = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
+    boardState.splice(clickedCell.target.cellIndex, 1, clickedCell.target.textContent);
+    
+    for (i = 0; i <= 7; i++) {
+        let winCon = winConditionsArray[i];
+        let a = boardState[winCon[0]];
+        let b = boardState[winCon[1]];
+        let c = boardState[winCon[2]];
 
-
-    console.log(clickedCell)
-
+        if (a === '' || b === '' || c === '') {
+            continue;
+        }
+        if (a == b && b ==c){
+            console.log("You win!")
+        }
+    }
 }
