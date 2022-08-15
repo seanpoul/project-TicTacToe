@@ -1,21 +1,22 @@
-const getTable = document.createElement('TABLE');
 let clickCounter = 0;
 let clickedCell;
 let boardState = ["", "", "", "", "", "", "", "", "",];
+let makeTBody;
+
+let playerInfo = document.getElementById('insertGameboardHere');
 
 (function makeGameboard() {
-    document.body.append(getTable);
-    const makeTBody = getTable.createTBody();
+    const getTable = document.createElement('TABLE');
+    playerInfo.append(getTable);
+    makeTBody = getTable.createTBody();
     const makeRow = makeTBody.insertRow();
-
+    
     for (i = 0; i < 9; i++) {
         makeRow.insertCell(i)
     }
 })();
 
-// console.log(clickedCell)
-
-getTable.addEventListener('click', (clickedCell) => {
+makeTBody.addEventListener('click', (clickedCell) => {
     clickCounter++
     if (clickCounter === 0 || clickCounter % 2) {
         if (clickedCell.target.textContent === "O" || clickedCell.target.textContent === "X") {
@@ -34,11 +35,9 @@ getTable.addEventListener('click', (clickedCell) => {
         else if (typeof clickedCell.target.textContent !== 'undefined') {
             clickedCell.target.textContent = "O";
         }
-
     }
     checkWinner(clickedCell)
 });
-
 
 function checkWinner(clickedCell) {
     let winConditionsArray = [[0, 1, 2], [3, 4, 5], [6, 7, 8],

@@ -1,18 +1,60 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    display: grid;
+    grid-template-rows: 100px 1fr 1fr auto;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
     display: grid;
-    grid-template-rows: 80px 1fr;
-    grid-template-columns: 1fr;
+    grid-template-rows: 60px;
     justify-items: center;
     align-items: center;
+}
+
+.playerInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+}
+
+.playerOneInfo,
+.playerTwoInfo {
+    display: grid;
+    grid-template-rows: 80px;
+    justify-items: center;
+    font-size: 20px;
+}
+
+.playerTwoInfo {
+    grid-column: 3/4;
+}
+
+#playerOneName, #playerTwoName{
+    display: grid;
+    gap: 10px;
+    justify-items: center;
+}
+
+input{
+    font-size: 20px;
+}
+
+button{
+    height: fit-content;
+    width: fit-content;
 }
 
 table {
     display: grid;
     justify-content: center;
+    grid-row: 1/2;
+    grid-column: 2/3;
 }
 
 tr {
@@ -29,4 +71,12 @@ td {
     height: 100px;
     width: 100px;
     font-size: 80px;
+}
+
+.winnerDisplay{
+    display: grid;
+    position: absolute;
+    top: 70%;
+    justify-items: center;
+    width: 100vw;
 }
