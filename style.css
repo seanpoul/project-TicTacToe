@@ -6,9 +6,9 @@ tr {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
-    border: red solid 1px;
     position: relative;
     left: 150%;
+    /* border: red solid 1px; */
 }
 
 td {
