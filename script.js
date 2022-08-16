@@ -8,9 +8,9 @@ const markerTwo = "O";
 let currentPlayerOne = "Player One";
 let currentPlayerTwo = "Player Two";
 let gameOver = true;
+const getTable = document.createElement('TABLE');
 
-(function makeGameboard() {
-    const getTable = document.createElement('TABLE');
+function makeGameboard() {
     playerInfo.append(getTable);
     makeTBody = getTable.createTBody();
     const makeRow = makeTBody.insertRow();
@@ -18,9 +18,10 @@ let gameOver = true;
     for (i = 0; i < 9; i++) {
         makeRow.insertCell(i)
     }
-})();
+};
 
-console.log("click")
+makeGameboard()
+
 makeTBody.addEventListener('click', (clickedCell) => {
     if (gameOver === false) {
         clickCounter++
@@ -74,6 +75,7 @@ function checkWinner(clickedCell) {
             continue;
         }
         if (a == b && b == c) {
+            gameOver = true;
             if (a == markerOne) {
                 console.log("one")
                 announceWinner(currentPlayerOne)
@@ -106,9 +108,14 @@ allButtons.forEach(button => {
             playerTwo.value = ""
         }
         if (e.target == startGame) {
-            console.log("start")
             gameOver = false;
         }
-
+        if (e.target == resetGame) {
+            boardState = ["", "", "", "", "", "", "", "", "",];
+            gameOver = false;
+            for (i = 0; i < 9; i++) {
+                getTable.children[0].children[0].children[i].textContent = "";
+            }
+        }
     })
 })
