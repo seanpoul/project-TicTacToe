@@ -2,49 +2,68 @@ let clickCounter = 0;
 let clickedCell;
 let boardState = ["", "", "", "", "", "", "", "", "",];
 let makeTBody;
-
 let playerInfo = document.getElementById('insertGameboardHere');
+const markerOne = "X";
+const markerTwo = "O";
+let currentPlayerOne = "Player One";
+let currentPlayerTwo = "Player Two";
+let gameOver = true;
 
 (function makeGameboard() {
     const getTable = document.createElement('TABLE');
     playerInfo.append(getTable);
     makeTBody = getTable.createTBody();
     const makeRow = makeTBody.insertRow();
-    
+
     for (i = 0; i < 9; i++) {
         makeRow.insertCell(i)
     }
 })();
 
+console.log("click")
 makeTBody.addEventListener('click', (clickedCell) => {
-    clickCounter++
-    if (clickCounter === 0 || clickCounter % 2) {
-        if (clickedCell.target.textContent === "O" || clickedCell.target.textContent === "X") {
-            clickCounter--
-            return
+    if (gameOver === false) {
+        clickCounter++
+        if (clickCounter === 0 || clickCounter % 2) {
+            if (clickedCell.target.textContent === markerTwo || clickedCell.target.textContent === markerOne) {
+                clickCounter--
+                return
+            }
+            else if (typeof clickedCell.target.textContent !== 'undefined') {
+                clickedCell.target.textContent = markerOne;
+            }
         }
-        else if (typeof clickedCell.target.textContent !== 'undefined') {
-            clickedCell.target.textContent = "X";
+        else {
+            if (clickedCell.target.textContent === markerTwo || clickedCell.target.textContent === markerOne) {
+                clickCounter--
+                return
+            }
+            else if (typeof clickedCell.target.textContent !== 'undefined') {
+                clickedCell.target.textContent = markerTwo;
+            }
         }
+        checkWinner(clickedCell)
+    }
+});
+
+
+function announceWinner(gameWinner) {
+    let winnerName = document.getElementById('winnerDisplay');
+
+    if (gameWinner == currentPlayerOne) {
+        winnerName.textContent = `Congratulations ${currentPlayerOne} has won!`;
     }
     else {
-        if (clickedCell.target.textContent === "O" || clickedCell.target.textContent === "X") {
-            clickCounter--
-            return
-        }
-        else if (typeof clickedCell.target.textContent !== 'undefined') {
-            clickedCell.target.textContent = "O";
-        }
+        winnerName.textContent = `Congratulations ${currentPlayerTwo} has won!`;
     }
-    checkWinner(clickedCell)
-});
+}
 
 function checkWinner(clickedCell) {
     let winConditionsArray = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
     [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
     boardState.splice(clickedCell.target.cellIndex, 1, clickedCell.target.textContent);
-    
+
     for (i = 0; i <= 7; i++) {
         let winCon = winConditionsArray[i];
         let a = boardState[winCon[0]];
@@ -54,8 +73,42 @@ function checkWinner(clickedCell) {
         if (a === '' || b === '' || c === '') {
             continue;
         }
-        if (a == b && b ==c){
-            console.log("You win!")
+        if (a == b && b == c) {
+            if (a == markerOne) {
+                console.log("one")
+                announceWinner(currentPlayerOne)
+            }
+            else if (a == markerTwo) {
+                console.log("two")
+                announceWinner(currentPlayerTwo)
+            }
         }
     }
 }
+
+let allButtons = document.querySelectorAll('button')
+
+allButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        let startGame = document.getElementById('startGameBtn');
+        let resetGame = document.getElementById('resetGameBtn');
+        let oneName = document.getElementById('oneNameBtn');
+        let twoName = document.getElementById('twoNameBtn');
+        let playerOne = document.getElementById('oneName');
+        let playerTwo = document.getElementById('twoName');
+
+        if (e.target == oneName) {
+            currentPlayerOne = playerOne.value;
+            playerOne.value = ""
+        }
+        if (e.target == twoName) {
+            currentPlayerTwo = playerTwo.value;
+            playerTwo.value = ""
+        }
+        if (e.target == startGame) {
+            console.log("start")
+            gameOver = false;
+        }
+
+    })
+})

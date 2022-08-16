@@ -5,7 +5,7 @@
 
 body {
     display: grid;
-    grid-template-rows: 100px 1fr 1fr auto;
+    grid-template-rows: 60px 60px 1fr 1fr auto;
     justify-content: center;
     align-items: center;
 }
@@ -17,6 +17,13 @@ h1 {
     align-items: center;
 }
 
+.twoButtons{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    gap: 20px;
+}
+
 .playerInfo {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -26,7 +33,7 @@ h1 {
 .playerOneInfo,
 .playerTwoInfo {
     display: grid;
-    grid-template-rows: 80px;
+    grid-template-rows: 120px;
     justify-items: center;
     font-size: 20px;
 }
@@ -73,10 +80,11 @@ td {
     font-size: 80px;
 }
 
-.winnerDisplay{
+#winnerDisplay{
     display: grid;
     position: absolute;
     top: 70%;
     justify-items: center;
     width: 100vw;
+    font-size: 30px;
 }
