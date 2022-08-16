@@ -9,8 +9,9 @@ let currentPlayerOne = "Player One";
 let currentPlayerTwo = "Player Two";
 let gameOver = true;
 const getTable = document.createElement('TABLE');
+let winnerName = document.getElementById('winnerDisplay');
 
-function makeGameboard() {
+(function makeGameboard() {
     playerInfo.append(getTable);
     makeTBody = getTable.createTBody();
     const makeRow = makeTBody.insertRow();
@@ -18,9 +19,7 @@ function makeGameboard() {
     for (i = 0; i < 9; i++) {
         makeRow.insertCell(i)
     }
-};
-
-makeGameboard()
+})();
 
 makeTBody.addEventListener('click', (clickedCell) => {
     if (gameOver === false) {
@@ -47,15 +46,14 @@ makeTBody.addEventListener('click', (clickedCell) => {
     }
 });
 
-
 function announceWinner(gameWinner) {
-    let winnerName = document.getElementById('winnerDisplay');
-
     if (gameWinner == currentPlayerOne) {
+        winnerName.style.visibility = "visible";
         winnerName.textContent = `Congratulations ${currentPlayerOne} has won!`;
     }
     else {
         winnerName.textContent = `Congratulations ${currentPlayerTwo} has won!`;
+        winnerName.style.visibility = "visible";
     }
 }
 
@@ -113,6 +111,7 @@ allButtons.forEach(button => {
         if (e.target == resetGame) {
             boardState = ["", "", "", "", "", "", "", "", "",];
             gameOver = false;
+            winnerName.style.visibility = "hidden"
             for (i = 0; i < 9; i++) {
                 getTable.children[0].children[0].children[i].textContent = "";
             }
