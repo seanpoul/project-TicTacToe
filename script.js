@@ -84,6 +84,9 @@ function checkWinner(clickedCell) {
             }
         }
     }
+    if (!boardState.includes("")) {
+        winnerName.textContent = "Draw!"
+    }
 }
 
 let allButtons = document.querySelectorAll('button')
