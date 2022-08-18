@@ -1,7 +1,6 @@
 let clickCounter = 0;
 let clickedCell;
 let boardState = ["", "", "", "", "", "", "", "", "",];
-let makeTBody;
 let playerInfo = document.getElementById('insertGameboardHere');
 const markerOne = "X";
 const markerTwo = "O";
@@ -11,7 +10,8 @@ let gameOver = true;
 const getTable = document.createElement('TABLE');
 let winnerName = document.getElementById('winnerDisplay');
 
-(function makeGameboard() {
+let generateGameboard = (() => {
+    let makeTBody;
     playerInfo.append(getTable);
     makeTBody = getTable.createTBody();
     const makeRow = makeTBody.insertRow();
@@ -19,9 +19,10 @@ let winnerName = document.getElementById('winnerDisplay');
     for (i = 0; i < 9; i++) {
         makeRow.insertCell(i)
     }
+    return {makeTBody}
 })();
 
-makeTBody.addEventListener('click', (clickedCell) => {
+generateGameboard.makeTBody.addEventListener('click', (clickedCell) => {
     if (gameOver === false) {
         clickCounter++
         if (clickCounter === 0 || clickCounter % 2) {
